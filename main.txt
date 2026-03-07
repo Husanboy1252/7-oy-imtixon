@@ -1,0 +1,162 @@
+Create a production-ready backend using NestJS.
+
+Tech stack:
+- NestJS
+- TypeScript
+- PostgreSQL
+- TypeORM
+- JWT Authentication
+- Swagger API documentation
+- class-validator
+- bcrypt
+- file upload with multer (for resume)
+- email service (nodemailer)
+
+Application concept:
+A job platform where users can search for jobs and employers can post vacancies.
+Users can also search jobs based on their city, region and experience level.
+
+Roles:
+- Admin
+- User
+
+User abilities:
+- Register and login
+- Update profile
+- Upload resume (PDF)
+- Search jobs
+- Apply to jobs
+- View applied jobs
+- Post job vacancies
+
+Admin abilities:
+- Manage users
+- Manage jobs
+- Ban users
+- View statistics
+
+Location feature:
+Users should be able to search jobs based on region and city.
+If a user searches from their city, they should see jobs from that city first.
+
+Experience feature:
+Users have experienceYears in their profile.
+Jobs have requiredExperience.
+Users should be able to filter jobs based on experience.
+
+Salary feature:
+Jobs should include salaryMin and salaryMax.
+Users can filter jobs based on salary.
+
+Entities (TypeORM):
+
+User
+- id
+- name
+- email
+- password
+- role
+- regionId
+- cityId
+- experienceYears
+- resumeUrl
+- createdAt
+
+Region
+- id
+- name
+
+City
+- id
+- name
+- regionId
+
+Company
+- id
+- name
+- description
+- ownerId
+
+Job
+- id
+- title
+- description
+- salaryMin
+- salaryMax
+- requiredExperience
+- regionId
+- cityId
+- companyId
+- createdBy
+- createdAt
+
+Application
+- id
+- userId
+- jobId
+- status (pending, accepted, rejected)
+- createdAt
+
+Relationships:
+- Region has many cities
+- City belongs to region
+- Employer (User) creates many jobs
+- Job seekers apply to many jobs
+- Job has many applications
+- Application belongs to user and job
+
+Features:
+- JWT authentication
+- Role-based authorization guards
+- DTO validation with class-validator
+- Pagination for job listing
+- Filtering by:
+  - region
+  - city
+  - salary range
+  - experience
+  - job title
+
+File upload:
+- Users can upload resume (PDF)
+
+Email notifications:
+- When a user applies to a job, employer receives an email notification
+
+Project structure:
+
+src/
+ modules/
+   auth/
+   users/
+   jobs/
+   applications/
+   companies/
+   regions/
+   cities/
+   admin/
+ common/
+   guards/
+   decorators/
+   filters/
+   interceptors/
+ config/
+ database/
+
+Swagger:
+- Setup Swagger using @nestjs/swagger
+- Document all endpoints
+- Add API tags for modules
+- Enable Swagger at /api/docs
+
+Include:
+- TypeORM entities
+- DTOs
+- Controllers
+- Services
+- Guards
+- JWT strategy
+- Example .env file
+- Global validation pipe
+- Exception filter
+- Pagination helper
