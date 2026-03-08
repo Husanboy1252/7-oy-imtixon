@@ -6,6 +6,9 @@ import { UsersModule } from './users/users.module';
 import { CategoriesModule } from './categories/categories.module';
 import { JobsModule } from './jobs/jobs.module';
 import { GuardsModule } from './common/guards/guards.module';
+import { ProfileModule } from './profile/profile.module';
+import { MailModule } from './mail/mail.module';
+
 
 @Module({
   imports: [
@@ -23,7 +26,7 @@ import { GuardsModule } from './common/guards/guards.module';
         autoLoadEntities: true,
         synchronize: true, // developmentda schema avtomatik yangilanadi
       }),
-    }), AuthModule, UsersModule,  CategoriesModule, JobsModule, GuardsModule,     
+    }), AuthModule, UsersModule,  CategoriesModule, JobsModule, GuardsModule, ProfileModule, MailModule,     
   ],
 })
 export class AppModule {}

@@ -33,6 +33,16 @@ fullName: string;
   @CreateDateColumn()
   createdAt: Date;
 
+  @Column({type: `varchar`, nullable: true })
+otpCode: string | null;
+
+@Column({ type: 'timestamp', nullable: true })
+otpExpires: Date | null;
+
+@Column({ default: false })
+isVerified: boolean;
+
   @UpdateDateColumn()
   updatedAt: Date;
+    profile: any;
 }
