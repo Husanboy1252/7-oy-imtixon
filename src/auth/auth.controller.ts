@@ -4,12 +4,12 @@ import { AuthService } from './auth.service';
 import { LoginDto } from './dto/create-auth.dto';
 import { CreateUserDto } from '../users/dto/create-user.dto';
 
-// Swagger uchun vaqtincha DTO klassi (alohida faylga olsang ham bo'ladi)
+// Swaggerda joylar paydo bo'lishi uchun DTO
 class VerifyOtpDto {
-  @ApiProperty({ example: 'user@gmail.com' })
+  @ApiProperty({ example: 'user@gmail.com', description: 'Foydalanuvchi emaili' })
   email: string;
 
-  @ApiProperty({ example: '123456' })
+  @ApiProperty({ example: '123456', description: '6 xonali tasdiqlash kodi' })
   code: string;
 }
 
@@ -31,11 +31,12 @@ export class AuthController {
     return await this.authService.login(dto);
   }
 
+  // FAQAT BITTA VERIFY METODI QOLDIRILDI
   @Post('verify')
   @ApiOperation({ summary: 'OTP kodni tasdiqlash va Token olish' })
   @ApiResponse({ status: 200, description: 'Muvaffaqiyatli kirildi.' })
   async verify(@Body() verifyDto: VerifyOtpDto) {
-    // Xatolikni oldini olish uchun body borligini tekshiramiz
+    // Validatsiya: Ma'lumotlar to'liq kelganini tekshirish
     if (!verifyDto || !verifyDto.email || !verifyDto.code) {
       throw new BadRequestException("Email va tasdiqlash kodi yuborilishi shart!");
     }
@@ -43,5 +44,3 @@ export class AuthController {
     return await this.authService.verifyOtp(verifyDto.email, verifyDto.code);
   }
 }
-
-
